@@ -1,6 +1,6 @@
 <?php
 
-class reservationsController {
+class reservationsC {
 
     public function __construct()
     {
