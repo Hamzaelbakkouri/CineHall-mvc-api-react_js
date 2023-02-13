@@ -16,13 +16,16 @@ const Navbar = () => {
       <nav className="nav font-semibold text-lg">
         <ul className="flex items-center">
           <li className="p-4 border-b-2 border-orange-500 border-opacity-0 hover:border-opacity-100 hover:text-orange-500 duration-200 cursor-pointer active">
-            <a href="">Accueil</a>
+            <a href="/">Accueil</a>
           </li>
           <li className="p-4 border-b-2 border-orange-500 border-opacity-0 hover:border-opacity-100 hover:text-orange-500 duration-200 cursor-pointer">
-            <a href="">About</a>
+            <a href="/About">About</a>
           </li>
           <li className="p-4 border-b-2 border-orange-500 border-opacity-0 hover:border-opacity-100 hover:text-orange-500 duration-200 cursor-pointer">
-            <a href="">Movies</a>
+            <a href="/movies">Movies</a>
+          </li>
+          <li className="p-4 border-b-2 border-orange-500 border-opacity-0 hover:border-opacity-100 hover:text-orange-500 duration-200 cursor-pointer">
+            <a href="/Reservations">Reservations</a>
           </li>
         </ul>
       </nav>

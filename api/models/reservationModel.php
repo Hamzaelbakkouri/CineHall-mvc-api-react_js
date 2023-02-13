@@ -27,7 +27,7 @@ require("connection.php");
             $con = $test->connection();
             $response = array();
             if ($con) {
-            $sql = "SELECT * FROM `reservations` WHERE id = $id";
+            $sql = "SELECT * FROM `reservations` WHERE costumer = $id";
             $result = mysqli_query($con, $sql);
             if($result) {
                 $x = 0;
@@ -55,7 +55,6 @@ require("connection.php");
                 $resultat = $conn->prepare($sql);
                 $resultat->bind_param("ddds",$costumer,$seat,$hall,$date);
                 $resultat->execute() or die("Erreur lors de l'execution de la requete: ");
-                echo "Success:";
             }
         }
         function updatereservation($id,$costumer,$seat,$hall,$date){
@@ -68,7 +67,6 @@ require("connection.php");
                }else{
                 $resultat = $conn->prepare($sql);
                 $resultat->execute() or die("Erreur lors de l'execution de la requete: ");
-                echo "Success:";
             }
     }
         function deletereservation($id){
@@ -82,7 +80,18 @@ require("connection.php");
                  $resultat = $conn->prepare($sql);
                  $resultat->bind_param("d",$id);
                  $resultat->execute() or die("Erreur lors de l'execution de la requete: ");
-                 echo "Success:";
+            }
+        }
+        function unbook($id){
+            $test = new connection;
+            $conn = $test->connection();
+            if($conn->connect_error){
+                die('conection failed :'.$conn->connect_error);
+                echo "error";
+            }else{
+                 $sql = "UPDATE `seats` SET `is_booked` = '0' WHERE `id` = $id ;";
+                 $resultat = $conn->prepare($sql);
+                 $resultat->execute() or die("Erreur lors de l'execution de la requete: ");
             }
         }
     }

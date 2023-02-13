@@ -6,14 +6,17 @@ require("connection.php");
             $con = $test->connection();
             $response = array();
             if ($con) {
-            $sql = "SELECT * FROM `halls`";
+            $sql = "SELECT h.id , m.price , m.title , m.image , m.description , h.label FROM `halls` h , `movies` m WHERE h.movie = m.id and h.is_full = 0;";
             $result = mysqli_query($con, $sql);
             if($result) {
                 $x = 0;
                 while ($row = mysqli_fetch_assoc($result)) {
                     $response [$x]['id'] = $row['id'];
+                    $response [$x]['title'] = $row['title'];
+                    $response [$x]['image'] = $row['image'];
                     $response [$x]['label'] = $row['label'];
-                    $response [$x]['movie'] = $row['movie'];
+                    $response [$x]['price'] = $row['price'];
+                    $response [$x]['description'] = $row['description'];
                     $x++;
                 }
                 return json_encode($response, JSON_PRETTY_PRINT);
@@ -25,14 +28,17 @@ require("connection.php");
             $con = $test->connection();
             $response = array();
             if ($con) {
-            $sql = "SELECT * FROM `halls` WHERE id = $id";
+            $sql = "SELECT h.id , m.price , m.title , m.image , m.description , h.label FROM `halls` h , `movies` m WHERE h.movie = m.id and h.id = $id";
             $result = mysqli_query($con, $sql);
             if($result) {
                 $x = 0;
                 while ($row = mysqli_fetch_assoc($result)) {
                     $response [$x]['id'] = $row['id'];
+                    $response [$x]['title'] = $row['title'];
+                    $response [$x]['image'] = $row['image'];
                     $response [$x]['label'] = $row['label'];
-                    $response [$x]['movie'] = $row['movie'];
+                    $response [$x]['price'] = $row['price'];
+                    $response [$x]['description'] = $row['description'];
                     $x++;
                 }
                 return json_encode($response, JSON_PRETTY_PRINT);
