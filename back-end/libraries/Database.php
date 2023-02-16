@@ -6,7 +6,7 @@ class database{
     private $password = "";
     private $dbname = "cinema";
 
-    public function openConnection(){
+    public function db(){
         try {
             $conn = new PDO("mysql:host=$this->servername;dbname=$this->dbname", $this->username, $this->password);
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

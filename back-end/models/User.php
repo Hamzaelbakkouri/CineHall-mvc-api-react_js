@@ -3,7 +3,7 @@ class User extends database{
 
     function register($token,$nom,$email){
         $sql = "INSERT INTO `user`(`token`, `nom`, `email`) VALUES (:token,:nom,:email)";
-        $stmt=$this->openConnection()->prepare($sql);
+        $stmt=$this->db()->prepare($sql);
         $stmt->bindParam(':token', $token);
         $stmt->bindParam(':nom', $nom);
         $stmt->bindParam(':email', $email);
@@ -17,7 +17,7 @@ class User extends database{
             'isTrue'=>false
         ];
         $sql = "SELECT token ,`nom`, `email` FROM `user` WHERE `token`=:token";
-        $stmt=$this->openConnection()->prepare($sql);
+        $stmt=$this->db()->prepare($sql);
         $stmt->bindParam(':token', $token);
         $stmt->execute();
         if($stmt->rowCount()==1){

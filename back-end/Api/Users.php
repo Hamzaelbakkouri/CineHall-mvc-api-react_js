@@ -14,8 +14,6 @@ class Users extends Controller implements helpers {
 
     public function getToken($data)
     {
-        // $key='vDoWNVvoLBuil_L6v3vWDm4AwQz86v1vdU9wukQanGT8yYudqDPPeKJwFaXL-Nie';
-        // $jwt= JWT::encode($data,$key,'HS256');
         $hach = md5(rand(1,999),$data,'HS256');
         return $hach;
     }
