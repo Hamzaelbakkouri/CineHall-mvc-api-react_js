@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "react-icons": "^4.7.1"
+    "react-icons": "^4.7.1",
+    "react-material-ui-carousel": "^3.4.2"
   }
 }

@@ -6,6 +6,7 @@ import Register from "./components/Register";
 import Movies from "./pages/Movies";
 import Reservations from "./pages/Reservations";
 import About from "./pages/About";
+import Footer from "./components/Footer";
 
 
 
@@ -21,6 +22,7 @@ function App() {
         <Route path="/movies" element={<Movies />} />
         <Route path="/Reservations" element={<Reservations />} />
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 }
