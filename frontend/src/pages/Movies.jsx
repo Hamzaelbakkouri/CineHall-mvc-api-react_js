@@ -1,16 +1,15 @@
 import React from 'react'
-import { useEffect, useState } from 'react';
 import ListMovies from '../components/ListMovies';
-
-
-
 
 
 const Movies = () => {
 
+  function handle(data) {
+    console.log(data);
+  }
   return (
     <div>
-      <ListMovies />
+      <ListMovies onData={handle} />
     </div>
   )
 }

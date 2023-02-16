@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 
-const ListMovies = () => {
+const ListMovies = (props) => {
 
   const [movies, setmovies] = useState('');
   const [loading, setLoading] = useState(true);
@@ -37,21 +37,24 @@ const ListMovies = () => {
   else
     return (
       <div>
-        <select name="" id="" value={Dt} onChange={(e) => setDt(e.target.value)}>
-          <option value={''}>chose a day</option>
-          <option value={"2023-02-06"}>2023-02-08</option>
-          <option value={"2023-02-07"}>2023-02-07</option>
-          <option value={"2023-02-06"}>2023-02-06</option>
-        </select>
+        <div className='flex justify-center'>
+          <select className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-64 p-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-blue-500 dark:focus:border-blue-500' name="" id="" value={Dt} onChange={(e) => setDt(e.target.value)}>
+            <option value={''}>chose a day</option>
+            <option value={"2023-02-14"}>2023-02-14</option>
+            <option value={"2023-02-16"}>2023-02-16</option>
+            <option value={"2023-02-17"}>2023-02-17</option>
+            <option value={"2023-02-18"}>2023-02-18</option>
+          </select>
+        </div>
         <div className='w-full flex flex-wrap justify-center mt-20'>
           {movies.map(movie =>
-            <div key={movie.id_f} className="gap-4 mb-20 flex justify-center bg-white px-2">
+            <div className="gap-4 mb-20 flex justify-center bg-white px-2">
               <div className="max-w-sm overflow-hidden rounded-xl bg-white shadow-md duration-200 hover:scale-105 hover:shadow-xl">
                 <img src={movie.image} alt="plant" className="h-auto w-full" />
                 <div className="p-5">
                   <p className="text-medium mb-5 text-gray-700">{movie.nom_film}</p>
                   <p className="text-medium mb-5 text-gray-700">{movie.nom_salle}</p>
-                  <button className="w-full rounded-md bg-indigo-600  py-2 text-indigo-100 hover:bg-indigo-500 hover:shadow-md duration-75">book</button>
+                  <button onClick={() => props.onData(movie.id_f)} className="w-full rounded-md bg-indigo-600  py-2 text-indigo-100 hover:bg-indigo-500 hover:shadow-md duration-75">book</button>
                 </div>
               </div>
             </div>
