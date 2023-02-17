@@ -7,7 +7,7 @@ const Navbar = () => {
     <header className="header z-20 sticky top-0 bg-white shadow-md flex items-center justify-between px-8 py-02">
 
       <h1 className="w-3/12">
-        <a href="">
+        <a href="/">
           <img className='h-14' src={logo} alt="" />
         </a>
       </h1>
@@ -20,9 +20,9 @@ const Navbar = () => {
           <li className="p-4 border-b-2 border-orange-500 border-opacity-0 hover:border-opacity-100 hover:text-orange-500 duration-200 cursor-pointer">
             <a href="/About">About</a>
           </li>
-          <li className="p-4 border-b-2 border-orange-500 border-opacity-0 hover:border-opacity-100 hover:text-orange-500 duration-200 cursor-pointer">
+          {/* <li className="p-4 border-b-2 border-orange-500 border-opacity-0 hover:border-opacity-100 hover:text-orange-500 duration-200 cursor-pointer">
             <a href="/movies">Movies</a>
-          </li>
+          </li> */}
           <li className="p-4 border-b-2 border-orange-500 border-opacity-0 hover:border-opacity-100 hover:text-orange-500 duration-200 cursor-pointer">
             <a href="/Reservations">Reservations</a>
           </li>

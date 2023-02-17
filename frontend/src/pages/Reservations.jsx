@@ -3,9 +3,10 @@ import React, { useEffect, useState } from 'react';
 import { MdOutlineChairAlt } from "react-icons/md";
 
 
+
 const Reservations = () => {
   const [seat, setSeat] = useState();
-  
+
   const id = (id) => {
     setSeat(id);
   }

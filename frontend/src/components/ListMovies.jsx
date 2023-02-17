@@ -14,7 +14,6 @@ const ListMovies = (props) => {
     datas.append('date', Dt);
     axios.post('http://localhost/CineHall/movies/getmovies', datas)
       .then(response => {
-        setmovies(response.data);
         setLoading(false);
       })
       .catch(err => {
@@ -39,7 +38,7 @@ const ListMovies = (props) => {
       <div>
         <div className='flex justify-center'>
           <select className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-64 p-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-blue-500 dark:focus:border-blue-500' name="" id="" value={Dt} onChange={(e) => setDt(e.target.value)}>
-            <option value={''}>chose a day</option>
+            <option>chose a day</option>
             <option value={"2023-02-14"}>2023-02-14</option>
             <option value={"2023-02-16"}>2023-02-16</option>
             <option value={"2023-02-17"}>2023-02-17</option>

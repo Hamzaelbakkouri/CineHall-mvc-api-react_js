@@ -4,6 +4,8 @@
 
 // use Firebase\JWT\JWT;
 
+use Firebase\JWT\JWT;
+
 class Users extends Controller implements helpers {
     private $user;
 
@@ -14,8 +16,9 @@ class Users extends Controller implements helpers {
 
     public function getToken($data)
     {
-        $hach = md5(rand(1,999),$data,'HS256');
-        return $hach;
+        $key='vDoWNVvoLBuil_L6v3vWDm4AwQz86v1vdyYudqDPPeKJwFaXL-Nie';
+        $jwt=JWT::encode($data,$key,'HS256');
+        return $jwt;
     }
 
     function login()
