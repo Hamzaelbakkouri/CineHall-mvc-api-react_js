@@ -1,6 +1,5 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-// import { Redirect } from 'react-router-dom';
 
 const Register = () => {
   const [fullname, setName] = useState('');

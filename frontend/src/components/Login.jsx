@@ -1,10 +1,33 @@
 import axios from 'axios';
 import React, { useState } from 'react'
+import Cookies from "universal-cookie"
+import jwt from "jwt-decode"
 
 
 
 const Login = () => {
   const [token, setToken] = useState('');
+  const [istrue, setIstrue] = useState('');
+
+  const cookies = new Cookies();
+
+  const [user, setUser] = useState();
+
+  const logout = () => {
+    setUser(null);
+    cookies.remove("jwt_authorisation");
+  };
+
+  const login = () => {
+    const decoded = jwt(token);
+
+    setUser(decoded);
+
+    //set cookies 
+    cookies.set("jwt_authorisation", user, {
+      expires: new Date(decoded.exp * 1000)
+    });
+  };
 
   const handleSub = (e) => {
     e.preventDefault();
@@ -14,13 +37,9 @@ const Login = () => {
 
     axios.post('http://localhost/CineHall/Users/login', data)
       .then(res => {
-        if (res.data) {
-          // DeleteCookie('usrin');
-          // SetCookie('usrin', JSON.stringify(res.data));
-        }
-        // setJwt(res.data);
+        setIstrue(res.data.isTrue);
       });
-
+    
   }
   
   
@@ -42,7 +61,13 @@ const Login = () => {
                   <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-dark">Enter a token</label>
                   <input type="text" onChange={(e) => setToken(e.target.value)} value={token} name="fullname" id="name" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-300 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="********************" required />
                 </div>
-                <button type="submit" className="w-full text-dark bg-orange-400 hover:bg-orange-600 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">submit you token</button>
+                
+                <button onClick={() =>
+                  {if (istrue) {
+                  login();
+                  }}
+                  } type="submit" className="w-full text-dark bg-orange-400 hover:bg-orange-600 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">submit you token</button>
+                
               </form>
             </div>
           </div>

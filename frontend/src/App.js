@@ -8,9 +8,13 @@ import Reservations from "./pages/Reservations";
 import About from "./pages/About";
 import Footer from "./components/Footer";
 
+import { useState } from "react";
+
 
 
 function App() {
+
+
   return (
     <BrowserRouter>
       <Navbar />

@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root{
+	--background-inverse: #157979;
+	--background-inverse-light: #26d9d9;
+	--background-inverse-dark: #062222;
+}

@@ -37,4 +37,4 @@ class Users extends Controller implements helpers {
         $data=$this->user->register($token,$data['nom'],$data['email']);
         echo json_encode($data);
     }
-} 
+}

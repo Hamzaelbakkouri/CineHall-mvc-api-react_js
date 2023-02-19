@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 
+
+
 const ListMovies = (props) => {
 
   const [movies, setmovies] = useState('');
@@ -15,6 +17,7 @@ const ListMovies = (props) => {
     axios.post('http://localhost/CineHall/movies/getmovies', datas)
       .then(response => {
         setLoading(false);
+        setmovies(response.data);
       })
       .catch(err => {
         console.log(err);
@@ -53,7 +56,9 @@ const ListMovies = (props) => {
                 <div className="p-5">
                   <p className="text-medium mb-5 text-gray-700">{movie.nom_film}</p>
                   <p className="text-medium mb-5 text-gray-700">{movie.nom_salle}</p>
-                  <button onClick={() => props.onData(movie.id_f)} className="w-full rounded-md bg-indigo-600  py-2 text-indigo-100 hover:bg-indigo-500 hover:shadow-md duration-75">book</button>
+                  
+                    <button onClick={() => props.onData(movie.id_f)} className="w-full rounded-md bg-indigo-600  py-2 text-indigo-100 hover:bg-indigo-500 hover:shadow-md duration-75">book</button>
+                  
                 </div>
               </div>
             </div>
