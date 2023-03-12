@@ -1,13 +1,44 @@
 import React, { useEffect, useState } from 'react';
-// import axios from 'axios';
+import Cookies from "universal-cookie"
 import { MdOutlineChairAlt } from "react-icons/md";
-
+// import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 
 const Reservations = () => {
-  const [seat, setSeat] = useState();
+  const [idmovie, setidmovie] = useState();
 
-  let test = [2, 3, 7, 40,50,33,34,36,20];
+
+  function handle(data) {
+    setidmovie(data);
+  }
+  useEffect(() => {
+    console.log(idmovie);
+  })
+  const Cookie = new Cookies();
+
+  const Get = Cookie.get("jwt_authorisation");
+  if (!Get) {
+    window.location.href = '/';
+  }
+
+  const [seat, setSeat] = useState();
+  const [user, setUser] = useState();
+  const [film, setFilm] = useState();
+
+  useEffect(() => {
+    const data = new FormData();
+    data.append('id_f', 2 )
+
+    axios.post('http://localhost/CineHall/Reservations/placeReservedByFilm', data)
+      .then(res => {
+        setFilm(res.num_place);
+        console.log(film);
+      })
+
+  })
+
+  let test = [2, 3, 7, 40, 50, 33, 34, 36, 20, 44];
 
   const id = (id) => {
     setSeat(id);
@@ -17,16 +48,20 @@ const Reservations = () => {
   }, [seat]);
 
   return (
-    <div>
-      <form action="" className='mt-7'>
-        <div className='flex flex-col items-center mb-5'>
-          <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-dark">chose a movie</label>
-          <input type="text" name="fullname" id="name" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-64 p-2.5 dark:bg-gray-300 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" required="" />
-          <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-dark">your seat</label>
-          <input type="text" name="fullname" id="name" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-64 p-2.5 dark:bg-gray-300 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" required="" />
+    <div className='h-full w-full'
+      style={{
+        backgroundImage: "url(" + "https://images.pexels.com/photos/7234213/pexels-photo-7234213.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" + ")",
+        backgroundPosition: 'center',
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat'
+      }}>
+
+      <form className=''>
+        <div className='w-full flex justify-center mb-10'>
+          <button onClick={'/'} className='mt-5 text-white border-black rounded w-28 h-10 bg-orange-600'>Reserve</button>
         </div>
-        <div className='w-full flex justify-center'>
-          <div className='w-64 cursor-pointer flex flex-wrap justify-center'>
+        <div className='w-full flex justify-center '>
+          <div className='w-64 cursor-pointer flex flex-wrap justify-center mb-10'>
 
             {[...Array(50)].map((x, i) => {
               {
@@ -50,7 +85,7 @@ const Reservations = () => {
           </div>
         </div>
       </form>
-    </div>
+    </div >
   )
 
 

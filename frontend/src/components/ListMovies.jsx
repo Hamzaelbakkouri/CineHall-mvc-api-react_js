@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+import { Link } from 'react-router-dom';
 
 
 
@@ -41,7 +42,7 @@ const ListMovies = (props) => {
       <div>
         <div className='flex justify-center'>
           <select className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-64 p-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-blue-500 dark:focus:border-blue-500' name="" id="" value={Dt} onChange={(e) => setDt(e.target.value)}>
-            <option>chose a day</option>
+            <option>Chose A Day</option>
             <option value={"2023-02-14"}>2023-02-14</option>
             <option value={"2023-02-16"}>2023-02-16</option>
             <option value={"2023-02-17"}>2023-02-17</option>
@@ -56,9 +57,9 @@ const ListMovies = (props) => {
                 <div className="p-5">
                   <p className="text-medium mb-5 text-gray-700">{movie.nom_film}</p>
                   <p className="text-medium mb-5 text-gray-700">{movie.nom_salle}</p>
-                  
-                    <button onClick={() => props.onData(movie.id_f)} className="w-full rounded-md bg-indigo-600  py-2 text-indigo-100 hover:bg-indigo-500 hover:shadow-md duration-75">book</button>
-                  
+                  <button onClick={
+                    () => props.onData(movie.id_f)
+                  } className="w-full rounded-md bg-indigo-600  py-2 text-indigo-100 hover:bg-indigo-500 hover:shadow-md duration-75">book</button>
                 </div>
               </div>
             </div>

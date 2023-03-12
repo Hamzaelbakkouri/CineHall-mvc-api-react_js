@@ -15,5 +15,4 @@ class database{
             echo "Connection failed: " . $e->getMessage();
         }
     }
-
 }

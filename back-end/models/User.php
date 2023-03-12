@@ -7,9 +7,9 @@ class User extends database{
         $stmt->bindParam(':token', $token);
         $stmt->bindParam(':nom', $nom);
         $stmt->bindParam(':email', $email);
-        if($stmt->execute()){
-            return $token;
-        }
+        $stmt->execute();
+            // return $token;
+        
     }
 
     function login($token){
@@ -23,7 +23,7 @@ class User extends database{
         if($stmt->rowCount()==1){
             $res=$stmt->fetch();
             $feedback=[
-                'isTrue'=>true,
+                // 'isTrue'=>true,
                 'token'=>$res['token'],
                 'nom'=>$res['nom'],
                 'email'=>$res['email'],

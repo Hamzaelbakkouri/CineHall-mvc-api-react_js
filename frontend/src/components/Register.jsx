@@ -4,7 +4,6 @@ import React, { useState } from 'react';
 const Register = () => {
   const [fullname, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [jwt, setJwt] = useState();
 
   const handlesubmit = (e) => {
     e.preventDefault();
@@ -15,8 +14,7 @@ const Register = () => {
 
     axios.post('http://localhost/CineHall/Users/register', data)
       .then(res => {
-        // alert(res.data);
-        setJwt(res.data);
+        console.log(res.data);
       });
   }
 
@@ -44,7 +42,6 @@ const Register = () => {
               <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-dark">
               Your Token
             </h1>
-              <input type="text" className='w-full' value={jwt}/>
             </form>
           </div>
         </div>

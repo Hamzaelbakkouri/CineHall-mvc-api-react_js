@@ -21,10 +21,9 @@ class Reservations extends Controller{
         $id_f=$_POST['id_f'];
         $num_place=$_POST['num_place'];
         if($this->Reservation->reserver($token,$id_f,$num_place)){
-            echo json_encode(["etat"=>"reserver"]);
+            echo json_encode(["message"=>"reserver"]);
         }
     }
-
 
     function getplacesVides()
     {

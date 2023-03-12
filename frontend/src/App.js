@@ -7,10 +7,8 @@ import Movies from "./pages/Movies";
 import Reservations from "./pages/Reservations";
 import About from "./pages/About";
 import Footer from "./components/Footer";
-
-import { useState } from "react";
-
-
+import ReservationUser from "./components/ReservationUser";
+// import { useState } from "react";
 
 function App() {
 
@@ -25,6 +23,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/Reservations" element={<Reservations />} />
+        <Route path="/reserveUser" element={<ReservationUser />} />
       </Routes>
       <Footer />
     </BrowserRouter>
