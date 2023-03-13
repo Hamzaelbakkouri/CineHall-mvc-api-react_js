@@ -13,9 +13,7 @@ const Register = () => {
     data.append('email', email)
 
     axios.post('http://localhost/CineHall/Users/register', data)
-      .then(res => {
-        console.log(res.data);
-      });
+    window.location.href='/login';
   }
 
   return (

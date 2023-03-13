@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import { Link } from 'react-router-dom';
 
 
 
@@ -51,15 +50,14 @@ const ListMovies = (props) => {
         </div>
         <div className='w-full flex flex-wrap justify-center mt-20'>
           {movies.map(movie =>
-            <div className="gap-4 mb-20 flex justify-center bg-white px-2">
-              <div className="max-w-sm overflow-hidden rounded-xl bg-white shadow-md duration-200 hover:scale-105 hover:shadow-xl">
+            <div className="gap-4 mb-20 flex justify-center px-2">
+              <div className="max-w-sm overflow-hidden rounded-xl  shadow-md duration-200 hover:scale-105 hover:shadow-xl">
                 <img src={movie.image} alt="plant" className="h-auto w-full" />
                 <div className="p-5">
-                  <p className="text-medium mb-5 text-gray-700">{movie.nom_film}</p>
-                  <p className="text-medium mb-5 text-gray-700">{movie.nom_salle}</p>
+                  <p className="text-medium mb-5 text-white">{movie.nom_film}</p>
+                  <p className="text-medium mb-5 text-white">{movie.nom_salle}</p>
                   <button onClick={
-                    () => props.onData(movie.id_f)
-                  } className="w-full rounded-md bg-indigo-600  py-2 text-indigo-100 hover:bg-indigo-500 hover:shadow-md duration-75">book</button>
+                    () => props.onData(movie.id_f)} className="w-full rounded-md bg-indigo-600  py-2 text-white hover:bg-indigo-500 hover:shadow-md duration-75">book</button>
                 </div>
               </div>
             </div>

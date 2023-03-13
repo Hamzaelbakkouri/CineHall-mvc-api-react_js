@@ -7,7 +7,7 @@ class Reservation extends database{
         $stmt=$this->db()->prepare($sql);
         $stmt->bindParam(':id_f',$id_f);
         if($stmt->execute()){
-            $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
+            $data=$stmt->fetchAll(PDO::FETCH_COLUMN);
             return $data;
         }
     }

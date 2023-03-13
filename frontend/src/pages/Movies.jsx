@@ -1,19 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import ListMovies from '../components/ListMovies';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
-
+import Cookies from 'universal-cookie';
 
 const Movies = () => {
   const [idmovie, setidmovie] = useState();
-
+  const cooki = new Cookies();
   function handle(data) {
     setidmovie(data);
+    window.location.href = '/reservations'
   }
   useEffect(() => {
-    console.log(idmovie);
+    cooki.set('idFilm', idmovie);
   })
-  // window.location.href = ''
   return (
     <div>
       <ListMovies onData={handle} />
