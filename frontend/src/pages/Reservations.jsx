@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Cookies from "universal-cookie"
 import { MdOutlineChairAlt } from "react-icons/md";
 import axios from 'axios';
+import Swal, { withReactContent } from 'sweetalert2';
 // import { Link } from 'react-router-dom';
 
 
@@ -28,21 +29,33 @@ const Reservations = () => {
       .then(res => {
         setChairs(res.data);
       })
-    axios.post()
-  },[])
+  }, [])
 
   // useEffect(() => {  
   const reserver = (e) => {
     e.preventDefault();
-    const data = new FormData();
-    data.append('token', token)
-    data.append('id_f', id_f)
-    data.append('num_place', seats)
-    axios.post('http://localhost/CineHall/Reservations/reserver', data)
-      .then(res => {
-        setInfo(res.data);
-        console.log(info);
-      })
+    if (seats) {
+      const data = new FormData();
+      data.append('token', token)
+      data.append('id_f', id_f)
+      data.append('num_place', seats)
+      axios.post('http://localhost/CineHall/Reservations/reserver', data)
+        .then(res => {
+          setSeat();
+          setInfo(res.data);
+          console.log(info);
+        }).then(() => {
+
+          const da = new FormData();
+          da.append('id_f', id_f)
+          axios.post('http://localhost/CineHall/Reservations/placeReservedByFilm', da)
+            .then(res => {
+              setChairs(res.data);
+            })
+        })
+    } else {
+      alert('wa khaawi');
+    }
   }
   // },[])
   const id = (id) => {
@@ -68,12 +81,12 @@ const Reservations = () => {
             {
 
               [...Array(50)].map((i, x) => {
-                if (chairs.includes(x+1)) {
-                  return <div key={x+1}>
+                if (chairs.includes(x + 1)) {
+                  return <div key={x + 1}>
                     <MdOutlineChairAlt className='w-14 h-10 border rounded bg-gray-600 events-none opacity-50 cursor-not-allowed' />
                   </div>
                 } else {
-                  return <div key={x+1}>
+                  return <div key={x + 1}>
                     <MdOutlineChairAlt className='w-14 h-10 border rounded hover:bg-orange-600' onClick={() => { id(x + 1) }} />
                   </div>
                 }

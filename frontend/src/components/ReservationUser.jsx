@@ -1,14 +1,13 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import Cookies from 'universal-cookie'
+import Swal from 'sweetalert2'
 
 
 const ReservationUser = () => {
   // e.preventDefault();
   const [data, setData] = useState([]);
-
   const cookie = new Cookies();
-
   const user = cookie.get('jwt_authorisation');
 
   useEffect(() => {
@@ -18,18 +17,39 @@ const ReservationUser = () => {
       .then(res => {
         setData(res.data)
       });
-    console.log(data);
+    // console.log(data);
   }, [])
 
   const click = (prop) => {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
 
-    // console.log(prop);
-    const dt = new FormData();
-    dt.append('id_res', prop)
-    axios.post('http://localhost/CineHall/Reservations/delete_res', dt)
-      .then(res => {
-        // alert(res.data)
-      })
+        const dt = new FormData();
+        dt.append('id_res', prop)
+        axios.post('http://localhost/CineHall/Reservations/delete_res', dt)
+        .then(() => {
+          const daa = new FormData();
+          daa.append('token', user)
+          axios.post('http://localhost/CineHall/Reservations/mesreservations', daa)
+          .then(res => {
+            setData(res.data)
+          });
+        })
+        Swal.fire(
+          'Deleted!',
+          'Your file has been deleted.',
+          'success'
+        )
+      }
+    })
     // window.location.href='/reserveUser'
   }
 
@@ -46,7 +66,7 @@ const ReservationUser = () => {
               <h2>{dat.num_place}</h2>
               <div className="card-actions justify-center">
               </div>
-              <button onClick={()=>click(dat.id_res)} className="btn btn-primary">Delete Reservation</button>
+              <button onClick={() => click(dat.id_res)} className="btn btn-primary">Delete Reservation</button>
             </div>
           </div>
         </div>

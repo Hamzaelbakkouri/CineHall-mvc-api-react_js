@@ -1,29 +1,47 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-
+// import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import swal from "sweetalert2";
 
 
 const ListMovies = (props) => {
 
   const [movies, setmovies] = useState('');
   const [loading, setLoading] = useState(true);
-  const [Dt, setDt] = useState('');
-  // console.log(Dt);
 
+
+  const [selectedDate, setSelectedDate] = useState('');
+
+  const handleDateChange = (date) => {
+    const dayOfWeek = date;
+    // console.log(date);
+
+    if (dayOfWeek === 0) {
+      swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Sorry, we're closed on Sundays. Please select a different date.",
+      });
+      return;
+    }
+
+    setSelectedDate(date);
+  };
 
   useEffect(() => {
     const datas = new FormData();
-    datas.append('date', Dt);
+    datas.append('date', selectedDate);
     axios.post('http://localhost/CineHall/movies/getmovies', datas)
       .then(response => {
         setLoading(false);
         setmovies(response.data);
+        console.log(movies);
       })
       .catch(err => {
         console.log(err);
       })
-
-  }, [Dt]);
+  }, [selectedDate]);
 
   if (loading) {
     return (
@@ -39,7 +57,24 @@ const ListMovies = (props) => {
   else
     return (
       <div>
-        <div className='flex justify-center'>
+        <div className="flex flex-col items-center">
+          <h2 className="text-2xl font-bold mb-4">Select A Date:</h2>
+          {/* <DatePicker
+            selected={selectedDate}
+            onChange={handleDateChange}
+            excludeDayOfWeek={[0]}
+            className="bg-white border rounded-md p-2 shadow-md"
+          /> */}
+
+          <div class="relative max-w-sm">
+            <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+              <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
+            </div>
+            <input datepicker type="date" value={selectedDate} onChange={(e) => handleDateChange(e.target.value)} class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date" />
+          </div>
+
+        </div>
+        {/* <div className='flex justify-center'>
           <select className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-64 p-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-dark dark:focus:ring-blue-500 dark:focus:border-blue-500' name="" id="" value={Dt} onChange={(e) => setDt(e.target.value)}>
             <option>Chose A Day</option>
             <option value={"2023-02-14"}>2023-02-14</option>
@@ -47,7 +82,7 @@ const ListMovies = (props) => {
             <option value={"2023-02-17"}>2023-02-17</option>
             <option value={"2023-02-18"}>2023-02-18</option>
           </select>
-        </div>
+        </div> */}
         <div className='w-full flex flex-wrap justify-center mt-20'>
           {movies.map(movie =>
             <div className="gap-4 mb-20 flex justify-center px-2">
